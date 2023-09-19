@@ -200,6 +200,7 @@ public class Main{
                 if(i!=size-1) System.out.print("\""+root_list.get(i)+"\"" + " and ");
                 else System.out.print("\""+root_list.get(i)+"\"");
             }
+            System.out.println();
             return ("multiple roots");
         } 
     }
