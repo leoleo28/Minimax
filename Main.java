@@ -36,18 +36,18 @@ public class Main{
                 String inputLine = scanner.nextLine();  
                 if(inputLine.contains("=")){   // leaf node
                     String[] split_inputLine = inputLine.split("=");
-                    String leaf_Node = split_inputLine[0].strip();
-                    int val = Integer.valueOf(split_inputLine[1].strip());
+                    String leaf_Node = split_inputLine[0].trim();
+                    int val = Integer.valueOf(split_inputLine[1].trim());
                     value.put(leaf_Node,val);
                 }
                 else{ // internal node
                     String[] split_inputLine = inputLine.split(":");
-                    String internal_Node = split_inputLine[0].strip();
+                    String internal_Node = split_inputLine[0].trim();
                     String child = split_inputLine[1].substring(split_inputLine[1].indexOf("[")+1, split_inputLine[1].indexOf("]"));
                     String[] child_list=child.split(",");
                     edge.put(internal_Node,new ArrayList<>());
                     for(int i=0;i<child_list.length;i++){
-                        child_list[i]=child_list[i].strip();
+                        child_list[i]=child_list[i].trim();
                         edge.get(internal_Node).add(child_list[i]);
                     }
                 }
