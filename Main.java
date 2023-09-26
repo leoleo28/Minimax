@@ -58,7 +58,7 @@ public class Main{
             e.printStackTrace();
             System.exit(1);
         }
-
+        for(String vertex: edge.keySet()) Collections.sort(edge.get(vertex));
         // Initial values of Alpha and Beta
         int alpha = Integer.MIN_VALUE; int beta = Integer.MAX_VALUE;
         String rootNode =  findRootNode(edge);
