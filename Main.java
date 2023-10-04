@@ -23,12 +23,12 @@ public class Main{
      public static void solve(boolean verbose, boolean alphaBetaPruning, boolean maxRoot, String filePath) throws Exception{
         
         if (filePath.equals("")) {
-            System.out.println("Missing required file name");
+            System.out.println("Missing required input file name");
             return;
         }
 
-        Map<String,List<String>> edge=new HashMap<>();
-        Map<String, Integer> value = new HashMap<>(); 
+        Map<String,List<String>> edge=new HashMap<>(); // store the mapping of internal nodes to its child nodes.
+        Map<String, Integer> value = new HashMap<>(); // store the mapping of leaf node to its value.
         try{
             File inputFile = new File("./"+filePath);
             Scanner scanner = new Scanner(inputFile);  
@@ -58,13 +58,16 @@ public class Main{
             e.printStackTrace();
             System.exit(1);
         }
+
         for(String vertex: edge.keySet()) Collections.sort(edge.get(vertex));
+
         // Initial values of Alpha and Beta
         int alpha = Integer.MIN_VALUE; int beta = Integer.MAX_VALUE;
-        String rootNode =  findRootNode(edge);
-        if(rootNode.equals("multiple roots")) return;
 
-        List<String> missingNode = checkMissingNode(edge, value);
+        String rootNode =  findRootNode(edge); // the function to find root node of the graph
+        if(rootNode.equals("multiple roots")) return; 
+
+        List<String> missingNode = checkMissingNode(edge, value);// the function to check whether there is missing node in graph
         if(missingNode.size()>0){
             for(String error: missingNode) System.out.println(error);
             return;
@@ -179,7 +182,7 @@ public class Main{
     }
     
     public static String findRootNode(Map<String,List<String>> edge){
-        Map<String,Integer> indegree = new HashMap<>();
+        Map<String,Integer> indegree = new HashMap<>();// store the mapping of internal node to its indegree value.
         for(String internalNode: edge.keySet()) indegree.put(internalNode,0);
         for(String internalNode:edge.keySet()){
             List<String> child_list = edge.get(internalNode);
@@ -188,7 +191,7 @@ public class Main{
                 indegree.put(child, indegree.get(child)+1);
             }
         }
-        List<String> root_list = new ArrayList<>(); 
+        List<String> root_list = new ArrayList<>(); // store the node with indegree value equal to zero. i.e. root node.
         for(String internalNode:indegree.keySet()){
             if(indegree.get(internalNode)==0) root_list.add(internalNode);
         }
